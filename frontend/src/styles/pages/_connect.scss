@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.header{
+    background-color: $color-3;
+    height: 80px;
+    border-bottom: 10px solid $color-2;
+    display: flex;
+    align-items: center;
+
+    p{
+        color: $white;
+        margin: auto auto;
+        font-size: 20px;
+    }
+}
+
+.logo{
+    height: 100px;
+    margin: 20px auto 10px;
+
+    img{
+        width: 100%;
+    }
+}
+
+.connexion{
+    display: flex;
+    align-self: center;
+    text-align: center;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 600px;
+}
+
+
+
+// @media screen and(min-width : 300px){
+    
+// }

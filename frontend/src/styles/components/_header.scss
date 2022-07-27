@@ -1,0 +1,22 @@
+.nav-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    border-bottom: 2px solid $color-1;
+}
+
+.nav-header-left{
+    min-width: 200px;
+
+    img{
+        width: 100%;
+    }
+}
+
+
+.fa-right-from-bracket{
+    font-size: 30px;
+    color: $color-3;
+    
+}
