@@ -17,17 +17,21 @@
 }
 
 .post-right{
+    background-color: aqua;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-basis: 80%;
+    width: 80%;
+    position: relative;
 
-    p{
-        margin: 10px;
-        font-size: 15px;
-        font-weight: bold;
-    }
+   
+}
+
+.post-content{
+    margin: 10px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .post-right-header{

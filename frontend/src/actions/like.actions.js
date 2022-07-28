@@ -20,7 +20,7 @@ export const patchLike = (postId, userId)=>{
     return async (dispatch)=>{
         return await axios({
             method : "patch",
-            url : `${process.env.REACT_APP_API_URL}api/like/`,
+            url : `${process.env.REACT_APP_API_URL}api/like/${postId}`,
             data : {postId : postId},
             withCredentials : true
         })

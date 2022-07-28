@@ -21,6 +21,7 @@ exports.likePost = async (req, res) => {
                 const sqlAddLike = `INSERT INTO likes (user_id, post_id) VALUES (${infosLike.user_id}, ${infosLike.post_id})`;
                 database.query(sqlAddLike, (error, result) => {
                     if (error) res.status(400).json("Erreur ajout du like " + error);
+                    console.log('+1');
                     res.status(200).json("Like ajouté !")
                 });
                 // Si result renvoi du contenu (le like est dejà présent)
@@ -29,6 +30,7 @@ exports.likePost = async (req, res) => {
                 const sqlRemoveLike = `DELETE FROM likes WHERE user_id = ${infosLike.user_id} AND post_id = ${infosLike.post_id}`;
                 database.query(sqlRemoveLike, (error, result) => {
                     if (error) res.status(400).json("Erreur remove like " + error);
+                    console.log('-1');
                     res.status(200).json("Like supprimé")
                 });
             };

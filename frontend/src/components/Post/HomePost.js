@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {isEmpty} from '../Utils';
 import Post from './Post';
 import {getPosts} from '../../actions/post.actions'
+import { getComments } from '../../actions/comment.actions';
 
 const HomePost = () => {
 
@@ -19,6 +20,7 @@ const HomePost = () => {
     useEffect(() => {
         if (loadPost) {
             dispatch(getPosts());
+            dispatch(getComments());
             setLoadPost(false)
         }
     }, [loadPost, dispatch])
