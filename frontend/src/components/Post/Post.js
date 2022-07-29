@@ -27,8 +27,8 @@ const Post = ({ post }) => {
     const dispatch = useDispatch();
 
     // declenche la validation de l'update
-    const updateItem = ()=>{
-        if(textUpdate){
+    const updateItem = () => {
+        if (textUpdate) {
             dispatch(updatePost(post.post_id, textUpdate))
             setIsUpdated(false)
         }
@@ -70,13 +70,14 @@ const Post = ({ post }) => {
                                 </h3>
                                 <span>{dateParser(post.post_createdat)}</span>
                             </div>
-                            {isUpdated === false && 
-                            <p className='post-content'>{post.post_text}</p>}
+                            {isUpdated === false &&
+                                <p className='post-content'>{post.post_text}</p>
+                            }
                             {isUpdated && (
                                 <div className="update-post">
-                                    <textarea 
-                                    defaultValue={post.post_text}
-                                    onChange={(e)=> setTextUpdate(e.target.value)}
+                                    <textarea
+                                        defaultValue={post.post_text}
+                                        onChange={(e) => setTextUpdate(e.target.value)}
                                     />
                                     <div className="update-post-button">
                                         <button className='btn' onClick={updateItem}>
@@ -86,20 +87,31 @@ const Post = ({ post }) => {
                                 </div>
                             )}
                             {post.post_photo && <img src={post.post_photo} alt='post' className='post-image' />}
+                            {post.post_video && (
+                                <iframe
+                                    width="500"
+                                    height="300"
+                                    src={post.post_video}
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                    title={post.post_id}
+                                ></iframe>
+                            )}
                             {userData.userId === post.user_id && (
                                 <div className="button-container">
-                                    <div onClick={()=> setIsUpdated(!isUpdated)}>
+                                    <div onClick={() => setIsUpdated(!isUpdated)}>
                                         <i className="fa-solid fa-pen-to-square"></i>
                                     </div>
                                     <DeletePost postId={post.post_id} />
                                 </div>
                             )}
                             <div className="post-right-footer">
-                                <div className="post-comment" onClick={()=> setShowComments(!showComments)}>
+                                <div className="post-comment" onClick={() => setShowComments(!showComments)}>
                                     <i className="fa-solid fa-comment"></i>
                                     <span>Commenter</span>
                                 </div>
-                                <LikeButton post={post}/>
+                                <LikeButton post={post} />
                             </div>
                             {showComments && <Comments post={post} />}
                         </div>

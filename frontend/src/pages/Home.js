@@ -1,6 +1,7 @@
 import React, { Fragment} from 'react';
 import Header from '../components/Header';
 import HomePost from '../components/Post/HomePost';
+import NewPost from '../components/Post/NewPost';
 import HomeProfil from '../components/Profil/HomeProfil';
 
 const Home = () => {
@@ -11,10 +12,13 @@ const Home = () => {
             <Header />
             <div className="home-container">
                 <div className="home-profil">
-                    <HomeProfil/>
+                    <HomeProfil/>    
                 </div>
                 <div className="home-post">
                     <HomePost/>
+                </div>
+                <div className="home-newPost">
+                    <NewPost/>
                 </div>
             </div>
         </Fragment>

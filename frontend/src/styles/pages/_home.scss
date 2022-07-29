@@ -1,31 +1,39 @@
 .home-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    background-color: greenyellow;
+    background-color: #f8f8ff;
 }
 
 .home-profil {
-    background-color: $color-2;
-    border: 2px solid $color-1;
-    border-radius: 20px;
-    width: 250px;
+    background-color: $white;
+    border: 1px solid $color-1;
+    min-width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    order: 1;
+    margin: 20px ;
 }
 
 .home-post {
     background-color: aqua;
-    width: 60%;
+    width: 250px;
     min-width: 300px;
     max-width: 600px;
     text-align: center;
+    margin: 20px;
 
     ul{
         padding: 10px;
     }
+}
+
+.home-newPost{
+    margin: 20px;
+    border: 1px solid $color-1;
+    width: 280px;
 }
 
 @media screen and(min-width : 750px){

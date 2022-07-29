@@ -13,6 +13,7 @@ const HomeProfil = () => {
             </div>
             <div className="content-profil">
                 <h2>{userData.firstname}</h2>
+                {"\u00a0\u00a0"}
                 <h2>{userData.lastname}</h2>
             </div>
             <div className="modify-profil">

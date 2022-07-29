@@ -33,4 +33,4 @@ const storage = multer.diskStorage({  // Syntaxe dans doc multer
 
 
 // On exporte seulement une image de storage
-module.exports = multer({storage}).single("image");
+module.exports = multer({storage}).single("File");
