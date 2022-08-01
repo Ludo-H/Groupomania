@@ -4,26 +4,30 @@
     justify-content: center;
     align-items: center;
     background-color: #f8f8ff;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .home-profil {
     background-color: $white;
     border: 1px solid $color-1;
     min-width: 250px;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
     order: 1;
     margin: 20px ;
+    width: 90%;
+    border-radius: 10px;
 }
 
 .home-post {
-    background-color: aqua;
-    width: 250px;
+    width: 90%;
     min-width: 300px;
-    max-width: 600px;
+    max-width: 800px;
     text-align: center;
-    margin: 20px;
+   
 
     ul{
         padding: 10px;
@@ -31,15 +35,67 @@
 }
 
 .home-newPost{
+    background-color: $white;
+    border-radius: 10px;
     margin: 20px;
     border: 1px solid $color-1;
-    width: 280px;
+    width: 90%;
+    max-width: 600px;
 }
 
-@media screen and(min-width : 750px){
+@media screen and(min-width : 900px){
+    .home-container{
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: flex-start;
+    }
+
+    .home-profil{
+        width: 33%;
+        order: 0;
+        margin-left: 50px;
+    }
+
+    .home-post{
+        width: 60%;
+        order: 1;
+        align-self: flex-end;
+        margin-top: -465px;
+    }
+
+    .home-newPost{
+        width: 33%;
+        margin-left: 50px;
+    }
+}
+
+@media screen and(min-width: 1100px){
     .home-container{
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
         align-items: flex-start;
+    }
+
+    .home-profil{
+        width: 20%;
+        position: sticky;
+        top: 10px;
+        margin: 10px;
+    }
+
+    .home-post{
+        width: 50%;
+        order:0;
+        align-self: none;
+        margin-top: 0px;
+    }
+
+    .home-newPost{
+        width: 20%;
+        margin-left: 0px;
+        position: sticky;
+        top: 10px;
+        margin: 10px;
     }
 }

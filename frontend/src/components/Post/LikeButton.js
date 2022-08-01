@@ -11,7 +11,7 @@ const LikeButton = ({ post }) => {
     // le post est il deja liké par l'user
     const [liked, setLiked] = useState(true);
 
-    // pour ne pas rejouer le useEffect, une seule requete
+    // pour ne pas rejouer le useEffect, une seule requete 
     // const [loadLike, setLoadLike] = useState(true);
 
     // const [numberLikes, setNumberLikes] = useState(0)

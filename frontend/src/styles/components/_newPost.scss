@@ -20,6 +20,7 @@ padding: 10px;
     justify-content: center;
     align-items: center;
     width: 100%;
+
 }
 
 
@@ -27,6 +28,7 @@ padding: 10px;
     border: 1px solid $black;
     max-height: 200px;
     margin-bottom: 10px;
+    width: 80%;
 }
 
 .futurePost-container{
@@ -71,10 +73,22 @@ padding: 10px;
             justify-content: center;
             align-items: center;
             width: 95%;
+           
             
             img{
                 max-height: 200px;
+                max-width: 200px;
+                margin-top: 5px;
+                margin-bottom: 5px;
             }
+
+            iframe{
+                max-height: 90%;
+                max-width: 90%;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
         }
     } 
 }
@@ -108,8 +122,24 @@ padding: 10px;
             }
         }
 
+    .delete-video{
+        
+        button{
+            height: 30px;
+            margin-left: 70px;
+            width: 130px;
+        }
+
+        
+    }
+
     .btn-send{
         display: flex;
+    }
+
+    .cancel{
+        font-size: 16px;
+        font-weight: bold;
     }
 
     button{
@@ -118,12 +148,16 @@ padding: 10px;
         color: $white;
         height: 30px;
         padding: 0; 
-        min-width: 100px;
+        min-width: 35px;
+
+
+        &:hover{
+            transform: scale(1.06);
+        }
     }
 
     .send{
         background-color: rgb(39, 120, 240);
-        min-width: 80px;
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment, getComments } from '../../actions/comment.actions';
 import { dateParser, isEmpty } from '../Utils';
@@ -26,6 +26,11 @@ const Comments = ({ post }) => {
             .then(()=> setText(''));
         }
     }
+
+    useEffect(() => {
+      dispatch(getComments());
+    }, [commentsData])
+    
 
     const commDuPost = commentsData.filter((comment) => comment.post_id === post.post_id)
 
@@ -66,7 +71,7 @@ const Comments = ({ post }) => {
                 // <p key={comment.comment_id}>{comment.comment_text}</p>
             })}
             <form action="" onSubmit={handleComment} className='comment-form'>
-                <input type="text" name='text' onChange={(e)=> setText(e.target.value)} value={text} placeholder='Lâche un comm !' />
+                <input type="text" name='text' onChange={(e)=> setText(e.target.value)} value={text} placeholder='Commentaire...' />
                 <br />
                 <input type="submit" value="Envoyer" />
             </form>

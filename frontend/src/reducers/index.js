@@ -18,5 +18,5 @@ export default combineReducers({
     usersReducer,
     postReducer,
     likeReducer,
-    commentReducer
+    commentReducer,
 })

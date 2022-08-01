@@ -60,7 +60,6 @@ input[type="submit"] {
 
   &:hover {
     background: $color-1;
-    color: $color-2;
   }
 }
 input[type="checkbox"] {
@@ -73,6 +72,7 @@ i {
 
   &:hover {
     transform: scale(1.1);
+    cursor: pointer;
   }
 }
 body {

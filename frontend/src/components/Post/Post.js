@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updatePost } from '../../actions/post.actions';
+import { getPosts, updatePost } from '../../actions/post.actions';
 import { dateParser, isEmpty } from '../Utils';
 import Comments from './Comments';
 import DeletePost from './DeletePost';
@@ -30,6 +30,7 @@ const Post = ({ post }) => {
     const updateItem = () => {
         if (textUpdate) {
             dispatch(updatePost(post.post_id, textUpdate))
+            dispatch(getPosts());
             setIsUpdated(false)
         }
     }
@@ -70,34 +71,36 @@ const Post = ({ post }) => {
                                 </h3>
                                 <span>{dateParser(post.post_createdat)}</span>
                             </div>
-                            {isUpdated === false &&
-                                <p className='post-content'>{post.post_text}</p>
-                            }
+                            <div className="post-content">
+                                {isUpdated === false &&
+                                    <p>{post.post_text}</p>
+                                }
+                                {post.post_photo && <img src={post.post_photo} alt='post' className='post-image' />}
+                                {post.post_video && (
+                                    <iframe
+                                        width="500"
+                                        height="300"
+                                        src={post.post_video}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                        title={post.post_id}
+                                    ></iframe>
+                                )}
+                            </div>
                             {isUpdated && (
                                 <div className="update-post">
                                     <textarea
                                         defaultValue={post.post_text}
                                         onChange={(e) => setTextUpdate(e.target.value)}
                                     />
-                                    <div className="update-post-button">
-                                        <button className='btn' onClick={updateItem}>
+                                        <button className='button send' onClick={updateItem}>
                                             Valider modifications
                                         </button>
-                                    </div>
+                                    
                                 </div>
                             )}
-                            {post.post_photo && <img src={post.post_photo} alt='post' className='post-image' />}
-                            {post.post_video && (
-                                <iframe
-                                    width="500"
-                                    height="300"
-                                    src={post.post_video}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                    title={post.post_id}
-                                ></iframe>
-                            )}
+
                             {userData.userId === post.user_id && (
                                 <div className="button-container">
                                     <div onClick={() => setIsUpdated(!isUpdated)}>

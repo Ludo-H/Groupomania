@@ -69,9 +69,10 @@ exports.createPost = async (req, res) => {
             //         if (error) res.status(400).json(error);
             //         res.status(200).json("Post créé !");
             //     });
-            // });
+            // });   
 
             // On créé le contenu à envoyer
+
                 const newPost = {
                     post_text: req.body.text,
                     post_photo: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,   
