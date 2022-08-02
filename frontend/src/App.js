@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import jwt_decode from "jwt-decode";
 import { useDispatch } from 'react-redux';
 import { getUser } from './actions/user.actions';
-import { UidContext } from './components/AppContext';
+import { UserInfosContext } from './components/AppContext';
 
 // toutes les routes
 import Routes from "./components/Routes/index";
@@ -11,7 +11,10 @@ import Routes from "./components/Routes/index";
 function App() {
 
   // On récupére la valeur userId du cookie (token) pour le faire passer a dautrre comp
-  const [uid, setUid] = useState(null)
+  const [infosUser, setInfosUser] = useState({
+    userId : null,
+    admin : null
+  })
 
   // hook qui permet d'envoyer l'info avec la fonction de action
   // dispatch c'est pour déclencher une fonction
@@ -23,7 +26,7 @@ function App() {
       const token = Cookies.get().jwt;
       if (token) {
         const decoded = jwt_decode(token);
-        setUid(decoded.userId);
+        setInfosUser({userId : decoded.userId, admin : decoded.admin});
       } else {
         console.log("no token");
       }
@@ -31,15 +34,14 @@ function App() {
     fetchToken();
 
 
-    if (uid) dispatch(getUser(uid))
-  }, [uid, dispatch])
-
-
+    if (infosUser.userId) dispatch(getUser(infosUser.userId))
+  }, [infosUser.userId ,dispatch])
+  
 
   return (
-    <UidContext.Provider value={uid}>
+    <UserInfosContext.Provider value={infosUser}>
       <Routes />
-    </UidContext.Provider>
+    </UserInfosContext.Provider>
   );
 }
 

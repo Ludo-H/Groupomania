@@ -4,6 +4,7 @@ import {isEmpty} from '../Utils';
 import Post from './Post';
 import {getPosts} from '../../actions/post.actions'
 import { getComments } from '../../actions/comment.actions';
+import { getLikes } from '../../actions/like.actions';
 
 const HomePost = () => {
 
@@ -21,6 +22,7 @@ const HomePost = () => {
         if (loadPost) {
             dispatch(getPosts());
             dispatch(getComments());
+            dispatch(getLikes());
             setLoadPost(false)
         }
     }, [loadPost, dispatch])

@@ -1,98 +1,51 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLikes, patchLike } from '../../actions/like.actions';
-import { UidContext } from '../AppContext';
+import { getLikes } from '../../actions/like.actions';
+import { getPosts, likePost, postIsLiked } from '../../actions/post.actions';
+import { UserInfosContext } from '../AppContext';
 
 const LikeButton = ({ post }) => {
 
 
-    const uid = useContext(UidContext)
+    const infosUser = useContext(UserInfosContext)
 
     // le post est il deja liké par l'user
-    const [liked, setLiked] = useState(true);
-
-    // pour ne pas rejouer le useEffect, une seule requete 
-    // const [loadLike, setLoadLike] = useState(true);
-
-    // const [numberLikes, setNumberLikes] = useState(0)
+    const [liked, setLiked] = useState(false);
 
     // dispatch permet de lancer une fonction
     const dispatch = useDispatch()
 
-    // contenu du reducer like
-    const likesData = useSelector((state) => state.likeReducer);
+    // On récupère les données du reducer
+    const likeData = useSelector((state)=> state.likeReducer)
 
+    // on isole les likes du post
+    const likesDuPost = likeData.filter((like) => like.post_id === post.post_id)
 
-    useEffect(() => {
-        dispatch(getLikes());
-    }, [dispatch])
+    // on isole le like s'il existe, de l'user connecté avec le post
+    const userLikeThePost = likesDuPost.filter((like)=> like.user_id === infosUser.userId && like.post_id === post.post_id)
 
+    const handleLike = ()=>{
+        try {
+            dispatch(likePost(post.post_id, infosUser.userId))
+            .then(()=> dispatch(postIsLiked(post.post_id)))
+            .then(()=> setLiked(!liked))
+            .then(()=> dispatch(getPosts()))
+            .then(()=> dispatch(getLikes()))
 
-    // comportement au click sur le coeur
-    const handleLike = () => {
-
-        dispatch(patchLike(post.post_id, uid));
-
-        setTimeout(() => {
-            dispatch(getLikes())
-        }, 50);
-
-        setTimeout(() => {
-            for (let i = 0; i < likesData.length; i++) {
-                if (likesData[i].post_id === post.post_id ) {
-                    console.log('coucou');
-                    setLiked(true)
-                } else {
-                    console.log('coucou2');
-                    setLiked(false)
-                }
-            } 
-        }, 1000);
-        
-        
-
-        // if (likesData) {
-        //     // setNumberLikes(numberLikes - 1)
-        //     setLiked(false)
-        // } else {
-        //     // setNumberLikes(numberLikes + 1)
-        //     setLiked(true)
-        // }        
+            
+        } catch (error) {
+            console.log(error);
+        }
     }
-
-
-    // const la = useEffect(() => {
-
-    //     const likesReview = () => {
-    //         for (let i = 0; i < likesData.length; i++) {
-    //             if (likesData[i].post_id === post.post_id && likesData[i].user_id === uid) {
-    //                 return <i
-    //                     className="fa-solid fa-heart success"
-    //                     onClick={handleLike}
-    //                 ></i>
-
-    //             } else {
-    //                 return <i
-    //                     className="fa-solid fa-heart"
-    //                     onClick={handleLike}
-    //                 ></i>
-    //             }
-    //         }
-
-    //     }
-
-    //     likesReview()
-    // }, [likesData])
 
 
     return (
         <div className='like-container'>
-
             <i
-                className={liked ? "fa-solid fa-heart success" : "fa-solid fa-heart"}
+                className={userLikeThePost.length === 0 ? 'fa-solid fa-heart empty' : 'fa-solid fa-heart heart'}
                 onClick={handleLike}
             ></i>
-            {/* <p>{numberLikes}</p> */}
+            <p>{post.post_likes}</p>
         </div>
     );
 };

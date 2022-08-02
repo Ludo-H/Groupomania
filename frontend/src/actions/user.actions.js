@@ -11,10 +11,10 @@ export const UPDATE_BIO = "UPDATE_BIO"
 
 // puis chaque action aura sa fonction
 // dispatch représente ce qui va partir au reducer
-export const getUser = (uid) =>{
+export const getUser = (userId) =>{
     return async (dispatch)=>{
         return await axios
-        .get(`${process.env.REACT_APP_API_URL}api/user/${uid}`, {withCredentials: true})
+        .get(`${process.env.REACT_APP_API_URL}api/user/${userId}`, {withCredentials: true})
         .then((res)=>{
             // on retrouve le dispatch ici
             // reprenant la const voulue et le payload représentant la data envoyé

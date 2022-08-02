@@ -1,6 +1,7 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPosts, updatePost } from '../../actions/post.actions';
+import { UserInfosContext } from '../AppContext';
 import { dateParser, isEmpty } from '../Utils';
 import Comments from './Comments';
 import DeletePost from './DeletePost';
@@ -18,6 +19,8 @@ const Post = ({ post }) => {
 
     // pour afficher les comments
     const [showComments, setShowComments] = useState(false);
+
+    const userInfos = useContext(UserInfosContext) 
 
     // on récupère dans le store redux les infos 
     const usersData = useSelector((state) => state.usersReducer);
@@ -101,7 +104,7 @@ const Post = ({ post }) => {
                                 </div>
                             )}
 
-                            {userData.userId === post.user_id && (
+                            {(userData.userId === post.user_id || userInfos.admin === 1) && (
                                 <div className="button-container">
                                     <div onClick={() => setIsUpdated(!isUpdated)}>
                                         <i className="fa-solid fa-pen-to-square"></i>

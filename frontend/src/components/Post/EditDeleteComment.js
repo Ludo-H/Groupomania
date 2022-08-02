@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteComment, editComment, getComments } from '../../actions/comment.actions';
-import { UidContext } from '../AppContext';
+import { UserInfosContext } from '../AppContext';
 
 const EditDeleteComment = ({ comment, postId }) => {
 
@@ -15,7 +15,7 @@ const EditDeleteComment = ({ comment, postId }) => {
     const [text, setText] = useState('')
 
     // userId créé plus haut dans app
-    const uid = useContext(UidContext);
+    const userInfos = useContext(UserInfosContext);
 
     // import du dispatch pour lancer l'actioon
     const dispatch = useDispatch();
@@ -24,13 +24,18 @@ const EditDeleteComment = ({ comment, postId }) => {
     const handleEdit = (e) => {
         e.preventDefault();
         if (text) {
-            dispatch(editComment(text, comment.comment_id))
-            dispatch(getComments());
-            setText('')
-            setEdit(false)
+            try {
+                dispatch(editComment(text, comment.comment_id))
+                .then(()=>dispatch(getComments()))
+                .then(()=>setText(''))
+                .then(()=>setEdit(false))
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 
+    
 
     // suppression du comm
     const handleDelete = () => {
@@ -39,23 +44,23 @@ const EditDeleteComment = ({ comment, postId }) => {
 
     useEffect(() => {
         const checkAuthor = () => {
-            if (uid === comment.user_id) {
+            if (userInfos.userId === comment.user_id) {
                 setIsAuthor(true)
             }
         }
         checkAuthor();
-    }, [uid, comment.user_id])
+    }, [userInfos.userId, comment.user_id])
 
 
 
     return (
         <div className="edit-comment">
-            {isAuthor && edit === false && (
+            {(isAuthor || userInfos.admin === 1) && edit === false && (
                 <span onClick={() => setEdit(!edit)}>
                     <i className="fa-solid fa-pen-to-square"></i>
                 </span>
             )}
-            {isAuthor && edit && (
+            {(isAuthor || userInfos.admin === 1) && edit && (
                 <form action="" onSubmit={handleEdit} className='edit-comment-form'>
                     <span onClick={() => setEdit(!edit)}>
                         <i className="fa-solid fa-pen-to-square"></i>

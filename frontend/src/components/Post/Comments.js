@@ -27,9 +27,9 @@ const Comments = ({ post }) => {
         }
     }
 
-    useEffect(() => {
-      dispatch(getComments());
-    }, [commentsData])
+    // useEffect(() => {
+    //   dispatch(getComments());
+    // }, [commentsData])
     
 
     const commDuPost = commentsData.filter((comment) => comment.post_id === post.post_id)

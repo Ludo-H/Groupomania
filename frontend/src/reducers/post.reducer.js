@@ -1,4 +1,4 @@
-import { DELETE_POST, GET_POSTS, UPDATE_POST } from "../actions/post.actions";
+import { DELETE_POST, GET_POSTS, UPDATE_POST, POST_IS_LIKED} from "../actions/post.actions";
 
 const initialState = {};
 
@@ -25,6 +25,17 @@ export default function postReducer(state = initialState, action){
             // Pour mettre a jour le state tu le filtre
             // Si l'id du post (mapé) est différent de l'id du post en payload, tu le garde dans le state
             return state.filter((post)=> post.post_id !== action.payload.postId)
+        
+        case POST_IS_LIKED:
+            return state.map((post)=>{
+                    if(post.post_id === action.payload.postId){
+                        return{
+                            ...post,
+                            post_likers : action.payload.message
+                        }
+                    } else return post
+            })
+    
     
         default:
             return state
