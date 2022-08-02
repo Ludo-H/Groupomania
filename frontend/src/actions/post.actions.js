@@ -8,13 +8,14 @@ export const DELETE_POST = 'DELETE_POST';
 export const LIKE_POST = 'LIKE_POST';
 export const POST_IS_LIKED = 'POST_IS_LIKED';
 
-export const getPosts = ()=>{
+export const getPosts = (num)=>{
     return (dispatch)=>{
         return axios
         .get(`${process.env.REACT_APP_API_URL}api/post/`, {withCredentials: true})
         .then((res)=>{
             console.log(res.data);
-            dispatch({type : GET_POSTS, payload : res.data})
+            const array = res.data.slice(0, num)
+            dispatch({type : GET_POSTS, payload : array})
         })
         .catch((error)=> console.log(error))
     }
