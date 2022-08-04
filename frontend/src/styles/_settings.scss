@@ -58,9 +58,9 @@ input[type="submit"] {
   min-width: 130px;
   border: 2px solid ;
 
-  &:hover {
-    background: $color-1;
-  }
+  // &:hover {
+  //   background: $color-1;
+  // }
 }
 input[type="checkbox"] {
   box-shadow: none;

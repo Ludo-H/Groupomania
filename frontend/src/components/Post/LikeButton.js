@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLikes } from '../../actions/like.actions';
 import { getPosts, likePost, postIsLiked } from '../../actions/post.actions';
 import { UserInfosContext } from '../AppContext';
+import { isEmpty } from '../Utils';
 
 const LikeButton = ({ post }) => {
 
+    
 
     const infosUser = useContext(UserInfosContext)
 
@@ -19,7 +21,7 @@ const LikeButton = ({ post }) => {
     const likeData = useSelector((state)=> state.likeReducer)
 
     // on isole les likes du post
-    const likesDuPost = likeData.filter((like) => like.post_id === post.post_id)
+    const likesDuPost = !isEmpty(likeData[0]) && likeData.filter((like) => like.post_id === post.post_id)
 
     // on isole le like s'il existe, de l'user connecté avec le post
     const userLikeThePost = likesDuPost.filter((like)=> like.user_id === infosUser.userId && like.post_id === post.post_id)

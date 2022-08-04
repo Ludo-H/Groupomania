@@ -89,7 +89,7 @@ exports.likePost = (req, res, next) => {
                     }
                     database.query(`SELECT COUNT(*) as likes FROM likes WHERE post_id = ${postId}`, (err, result, fields) => {
                         if(err){
-                            return res.status(500).json({err});
+                            return res.status(500).json({err}); 
                         }
                         const numberOfLikes = result[0].likes;
                         database.query(`UPDATE posts SET post_likes = ${numberOfLikes} WHERE post_id = ${postId}`, (err, result, fields) => {

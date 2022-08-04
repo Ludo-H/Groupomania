@@ -5,6 +5,7 @@ import Post from './Post';
 import {getPosts} from '../../actions/post.actions'
 import { getComments } from '../../actions/comment.actions';
 import { getLikes } from '../../actions/like.actions';
+import { getUsers } from '../../actions/users.actions';
 
 const HomePost = () => {
 
@@ -30,11 +31,13 @@ const HomePost = () => {
     }
 
     // on joue la fonction une seule fois grace au false
+    // le useEffect va se relancer au scroll, changements infos user aussi
     useEffect(() => {
         if (loadPost) {
             dispatch(getPosts(countPosts));
             dispatch(getComments());
             dispatch(getLikes());
+            dispatch(getUsers())
             setLoadPost(false)
             setCountPosts(countPosts + 5)
         }

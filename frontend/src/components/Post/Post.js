@@ -54,6 +54,7 @@ const Post = ({ post }) => {
                 (
                     <Fragment>
                         <div className="post-left">
+                            <div className="post-user-image">
                             <img
                                 src={!isEmpty(usersData[0]) &&
                                     usersData.map((user) => {
@@ -62,6 +63,7 @@ const Post = ({ post }) => {
                                     }).join('')
                                 }
                                 alt="user" />
+                            </div>
                         </div>
                         <div className="post-right">
                             <div className="post-right-header">
