@@ -6,9 +6,13 @@ import EditDeleteComment from './EditDeleteComment';
 
 const Comments = ({ post }) => {
 
+    //********************************************************************/
     // contenu du comment
     const [text, setText] = useState('')
+    //********************************************************************/
 
+
+    //********************************************************************/
     // on récupère dans le store redux les infos 
     const usersData = useSelector((state) => state.usersReducer);
     const userData = useSelector((state) => state.userReducer);
@@ -17,22 +21,23 @@ const Comments = ({ post }) => {
     // import du dispatch pour lancer l'actioon
     const dispatch = useDispatch();
 
+    // Selection des commentaires propres au post passé en props
+    const commDuPost = commentsData.filter((comment) => comment.post_id === post.post_id)
+    //********************************************************************/
+
+
+    //********************************************************************/
     const handleComment = (e) => {
         e.preventDefault();
 
-        if(text){
+        if (text) {
             dispatch(addComment(text, post.post_id))
-            .then(()=> dispatch(getComments()))
-            .then(()=> setText(''));
+                .then(() => dispatch(getComments()))
+                .then(() => setText(''));
         }
     }
+    //********************************************************************/
 
-    // useEffect(() => {
-    //   dispatch(getComments());
-    // }, [commentsData])
-    
-
-    const commDuPost = commentsData.filter((comment) => comment.post_id === post.post_id)
 
     return (
         <div className="comments-container">
@@ -68,10 +73,15 @@ const Comments = ({ post }) => {
                         </div>
                     </div>
                 )
-                // <p key={comment.comment_id}>{comment.comment_text}</p>
             })}
             <form action="" onSubmit={handleComment} className='comment-form'>
-                <input type="text" name='text' onChange={(e)=> setText(e.target.value)} value={text} placeholder='Commentaire...' />
+                <input
+                    type="text"
+                    name='text'
+                    onChange={(e) => setText(e.target.value)}
+                    value={text}
+                    placeholder='Commentaire...' 
+                />
                 <br />
                 <input type="submit" value="Envoyer" />
             </form>

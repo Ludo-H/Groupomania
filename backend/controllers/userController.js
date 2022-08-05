@@ -96,203 +96,6 @@ exports.login = (req, res) => {
 
 
 //********************************************************************/
-// exports.updateUser = async (req, res) => {
-//     try {
-//         // On va vérifier si l'utilisateur est l'admin ou si il agit bien sur son compte
-//         const sqlAdmin = `SELECT * FROM users WHERE user_id = ${req.auth.userId}`;
-//         database.query(sqlAdmin, (error, result) => {
-//             if (error) res.status(400).json("Erreur affichage delete user " + error);
-//             // Pour pouvoir modifier, soit admin soit bon user
-//             if (req.auth.userId == req.params.id || req.auth.admin == 1) {
-//                 // Modification si il y a une image dans les changements user
-//                 if (req.file) {
-
-
-//                     // const newPhoto = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-//                     // const updateInfos = {
-//                     //     user_firstname: req.body.firstname,
-//                     //     user_lastname: req.body.lastname,
-//                     //     user_profilUrl: newPhoto
-//                     // };
-//                     // const sql = `UPDATE users SET ? WHERE user_id = ${req.params.id}`;
-//                     // database.query(sql, updateInfos, (error, result)=>{
-//                     //     if(error) res.status(400).json("Erreur changements user avec photo " + error);
-//                     //     res.status(200).json("Utilisateur à jour");
-//                     // });
-
-
-//                     let sql = `SELECT * FROM users WHERE user_id = ?`;
-//                     database.query(sql, req.params.id, (error, result) => {
-//                         if (error) res.status(400).json("Erreur affichage user avec image " + error);
-
-//                         // La ligne permet de vérifier si l'ancien post contient une image
-//                         // On supprime ici l'image du dossier    
-//                         if (result[0].photo_id != 56) {
-
-//                             // Cette variable IMPORTANTE va nous servir plus bas pour crééer le nouveau contenu
-//                             const photoId = result[0].photo_id
-
-//                             // On affiche la photo grace à l'id récupéré dans le post plus haut
-//                             const sql = `SELECT * FROM photos WHERE photo_id = ${result[0].photo_id}`;
-//                             database.query(sql, (error, result) => {
-//                                 if (error) res.status(400).json("Erreur affichage de la photo dans la table " + error);
-
-//                                 // On recréé le nom de l'image sans le chemin avant
-//                                 const imageToDelete = result[0].photo_url.split('/images')[1];
-
-//                                 // On supprime l'image du dossier node
-//                                 fs.unlink(`images/${imageToDelete}`, () => {
-//                                     if (error) console.log("Erreur de suppression image dans le dossier " + error);
-//                                     console.log('Image supprimée du dossier');
-//                                 })
-
-//                                 // On créé le contenu pour insérer la nouvelle image
-//                                 const newImage = {
-//                                     photo_url: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-//                                     user_id: req.params.id
-//                                 };
-
-//                                 // Requete pour remplacer l'ancienne image par la nouvelle dans la BDD, sans recréer d'id
-//                                 const sqlImage = `UPDATE photos SET ? WHERE photo_id = ${result[0].photo_id}`;
-//                                 database.query(sqlImage, newImage, (error, result) => {
-//                                     if (error) res.status(400).json(error);
-
-//                                     // On créé le contenu à envoyer
-//                                     const updateUser = {
-//                                         photo_id: photoId, // Variable IMPORTANTE plus haut, sans ça le contenu n'est pas retrouvable
-//                                         user_firstname: req.body.firstname,
-//                                         user_lastname: req.body.lastname,
-//                                     };
-//                                     // On update le post dans la BDD
-//                                     const sql = `UPDATE users SET ? WHERE user_id = ${req.params.id}`;
-//                                     database.query(sql, updateUser, (error, result) => {
-//                                         if (error) res.status(400).json(error);
-//                                         res.status(200).json("User mis à jour !");
-//                                     });
-//                                 });
-//                             })
-//                         }
-
-
-
-//                         else if (result[0].photo_id == 56) {
-//                             // On créé le contenu à envoyer
-//                             const newImage = {
-//                                 photo_url: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-//                                 user_id: req.params.id
-//                             };
-//                             // On envoie d'abord la photo dans la BDD, puis le post
-//                             const sqlImage = `INSERT INTO photos SET ?`;
-//                             database.query(sqlImage, newImage, (error, result) => {
-//                                 if (error) res.status(400).json(error);
-
-//                                 // result.insertId reprend l'id créé de la photo plus haut, il nous permet de faire le lien entre les deux tables
-//                                 const photoId = result.insertId;
-//                                 // On créé le contenu à envoyer
-//                                 const updateUser = {
-//                                     photo_id: photoId, // Variable IMPORTANTE plus haut, sans ça le contenu n'est pas retrouvable
-//                                     user_firstname: req.body.firstname,
-//                                     user_lastname: req.body.lastname,
-//                                 };
-//                                 // Envoie du post dans la BDD
-//                                 const sql = `UPDATE users SET ? WHERE user_id = ${req.params.id}`;
-//                                 database.query(sql, updateUser, (error, result) => {
-//                                     if (error) res.status(400).json(error);
-//                                     res.status(200).json("User mis à jour !");
-//                                 });
-//                             });
-
-
-//                         };
-//                     })
-//                 }
-
-
-//                 // Modification si il n'y a pas d'image dans les changements user
-//                 if (!req.file) {
-//                     const updateInfos = {
-//                         user_firstname: req.body.firstname,
-//                         user_lastname: req.body.lastname,
-//                         user_bio: req.body.bio
-//                     };
-//                     const sql = `UPDATE users SET ? WHERE user_id = ${req.params.id}`;
-//                     database.query(sql, updateInfos, (error, result) => {
-//                         if (error) res.status(400).json("Erreur de changement infos user " + error);
-//                         res.status(200).json("Modifications user à jour");
-//                     });
-//                 };
-//             } else {
-//                 res.status(400).json("Action non autorisée");
-//             }
-//         });
-
-//     } catch (error) {
-//         res.status(400).json("Erreur modification utilisateur " + error);
-//     };
-
-//     //     console.log(req);
-//     //     const userId = req.params.id;
-//     //     const id = req.auth.userId;
-//     //     if(userId != id){
-//     //         return res.status(403).json({message: "Requête non autorisée !"})
-//     //     }
-//     //     if(req.file){
-
-//     //         const newImageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-//     //             database.query(`SELECT * FROM users WHERE user_id = ${userId}`, (err, result) => {
-//     //                 if(err){
-//     //                     return res.status(404).json({err})
-//     //                 }
-//     //                 if(result.length === 0){
-//     //                     return res.status(404).json({message: "Utilisateur introuvable !"});
-//     //                 }
-//     //                 if(id != userId){
-//     //                     return res.status(403).json({message: "Requête non autorisée !"})
-//     //                 }
-//     //                 console.log(result);
-//     //                 const filename = result[0].imageUrl.split('/images/')[1];
-//     //                 if(filename != "default_avatar.png"){
-//     //                     fs.unlink(`images/${filename}`, () => {
-//     //                         database.query(`UPDATE users SET imageUrl = ? WHERE user_id = ${userId}`, [newImageUrl], (err, result, fields) => {
-//     //                             if(err){
-//     //                                 return res.status(403).json({message: "Ce nom d'utilisateur est déjà utilisé !"})
-//     //                             }
-//     //                             return res.status(201).json({message: "Profil mis à jour !"})
-//     //                         })    
-//     //                     })
-//     //                 } else{
-//     //                     return res.status(201).json({message: "Profil inchangé !"})
-//     //                 }
-//     //             })
-//     //     } else {
-//     //         const newFirstName = req.body.firstname;
-//     //         const lastName = req.body.lastname;
-
-//     //             database.query(`SELECT * FROM users WHERE user_id = ${userId}`, (err, result) => {
-//     //                 if(err){
-//     //                     return res.status(404).json({err})
-//     //                 }
-//     //                 if(result.length === 0){
-//     //                     return res.status(404).json({message: "Utilisateur introuvable !"});
-//     //                 }
-//     //                 if(id != userId){
-//     //                     return res.status(403).json({message: "Requête non autorisée !"})
-//     //                 }
-//     //                 database.query(`UPDATE users SET user_firstname = ?, user_lastname = ? WHERE user_id = ${userId}`, [newFirstName, lastName], (err, result) => {
-//     //                     if(err){
-//     //                         return res.status(403).json({message: "Ce nom d'utilisateur est déjà utilisé !"})
-//     //                     }
-//     //                     return res.status(201).json({message: "Profil mis à jour !"})
-//     //                 })
-
-//     //             })
-//     //     }
-//     //  }
-// };
-// //********************************************************************/
-
-
-//********************************************************************/
 exports.deleteAccount = async (req, res) => {
     try {
             // Pour pouvoir modifier, soit admin soit bon user
@@ -376,10 +179,7 @@ exports.getAllUsers = async (req, res) => {
 //********************************************************************/ 
 
 
-
-
-
-
+//********************************************************************/ 
 exports.modifyPhotoProfil = async (req, res) => {
     try {
             // Pour pouvoir modifier, soit admin soit bon user
@@ -417,8 +217,10 @@ exports.modifyPhotoProfil = async (req, res) => {
         res.status(400).json("Erreur affichage utilisateurs " + error);
     }
 };
+//********************************************************************/ 
 
 
+//********************************************************************/ 
 exports.modifyNameAndLastname = (req, res)=>{
     try {
         if (req.auth.userId == req.params.id || req.auth.admin == 1) {
@@ -440,3 +242,4 @@ exports.modifyNameAndLastname = (req, res)=>{
         res.status(400).json("Erreur modification nom et prénom " + error);
     }
 }
+//********************************************************************/ 

@@ -1,6 +1,5 @@
 .comments-container{
-    display: flex;
-    flex-direction: column;
+    @include flexColumn;
     width: 100%;
     padding: 5px;
     margin-bottom: 10px;
@@ -12,7 +11,7 @@
     width: 100%;
     margin-bottom: 10px;
     border-radius: 20px;
-    border: 1px solid $black;
+    border: $borderBlack;
     padding: 5px;
 }
 
@@ -32,13 +31,11 @@
 
 .right-part{
     flex-basis: 90%;
-    display: flex;
-    flex-direction: column;
-
+    @include flexColumn;
 }
 
 .comment-content{
-    border-bottom: 1px solid #000;
+    border-bottom: $borderBlack;
     margin-top: 5px;
     padding-bottom: 20px;
     width: 90%;
@@ -50,27 +47,23 @@
     display: flex;
     justify-content: space-between;
     width: 90%;
-    border-bottom: 1px solid $black;
+    border-bottom: $borderBlack;
     padding-bottom: 5px;
 
     span{
         font-size: 11px;
         font-weight: bold;
-        // padding-right: 20px;
     }
 
     h3{
         font-size: 14px;
-        // padding-left: 20px;
-    }
-
-    
+    }  
 }
 
 .comment-form{
 
     input[type='text']{
-        border: 1px solid $black;
+        border: $borderBlack;
         margin-bottom: 10px;
         width: 100%;
         height: 30px;

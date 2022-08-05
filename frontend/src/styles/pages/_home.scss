@@ -10,7 +10,7 @@
 
 .home-profil {
     background-color: $white;
-    border: 1px solid $color-1;
+    border: $borderColor1;
     min-width: 250px;
     max-width: 600px;
     display: flex;
@@ -38,7 +38,7 @@
     background-color: $white;
     border-radius: 10px;
     margin: 20px;
-    border: 1px solid $color-1;
+    border: $borderColor1;
     width: 90%;
     max-width: 600px;
 }

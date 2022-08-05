@@ -1,18 +1,19 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLikes } from '../../actions/like.actions';
-import { getPosts, likePost, postIsLiked } from '../../actions/post.actions';
+import { getLikes, likePost } from '../../actions/like.actions';
+import { getPosts, postIsLiked } from '../../actions/post.actions';
 import { UserInfosContext } from '../AppContext';
 import { isEmpty } from '../Utils';
 
 const LikeButton = ({ post }) => {
 
-    
-
-    const infosUser = useContext(UserInfosContext)
-
+    //********************************************************************/
     // le post est il deja liké par l'user
     const [liked, setLiked] = useState(false);
+    //********************************************************************/
+
+    //********************************************************************/
+    const infosUser = useContext(UserInfosContext)
 
     // dispatch permet de lancer une fonction
     const dispatch = useDispatch()
@@ -24,8 +25,11 @@ const LikeButton = ({ post }) => {
     const likesDuPost = !isEmpty(likeData[0]) && likeData.filter((like) => like.post_id === post.post_id)
 
     // on isole le like s'il existe, de l'user connecté avec le post
-    const userLikeThePost = likesDuPost.filter((like)=> like.user_id === infosUser.userId && like.post_id === post.post_id)
+    const userLikeThePost = !isEmpty(likesDuPost[0]) && likesDuPost.filter((like)=> like.user_id === infosUser.userId && like.post_id === post.post_id)
+    //********************************************************************/
 
+
+    //********************************************************************/
     const handleLike = ()=>{
         try {
             dispatch(likePost(post.post_id, infosUser.userId))
@@ -39,6 +43,7 @@ const LikeButton = ({ post }) => {
             console.log(error);
         }
     }
+    //********************************************************************/
 
 
     return (
@@ -47,7 +52,7 @@ const LikeButton = ({ post }) => {
                 className={userLikeThePost.length === 0 ? 'fa-solid fa-heart empty' : 'fa-solid fa-heart heart'}
                 onClick={handleLike}
             ></i>
-            <p>{post.post_likes}</p>
+            <p>{likesDuPost.length}</p>
         </div>
     );
 };

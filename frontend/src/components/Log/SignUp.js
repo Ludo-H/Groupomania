@@ -4,6 +4,7 @@ import LogIn from './LogIn';
 
 const SignUp = () => {
 
+    //********************************************************************/
     // quand inscription validée, on passe en true pour afficher le reste
     const [formSubmit, setFormSubmit] = useState(false);
 
@@ -13,13 +14,19 @@ const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirm, setPasswordConfirm] = useState("")
+    //********************************************************************/
 
+
+    //********************************************************************/
     // selection des div errors
+    const nameError = document.querySelector('.name-error.error');
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
     const passwordConfirmError = document.querySelector(".password-confirm.error");
+    //********************************************************************/
 
-
+    
+    //********************************************************************/
     // logique d'inscription
     const handleRegister = (e) => {
         e.preventDefault();
@@ -27,6 +34,14 @@ const SignUp = () => {
         if (password !== passwordConfirm) {
             passwordConfirmError.innerHTML = 'Les mots de passes ne correspondent pas';
             passwordError.innerHTML = "";
+            nameError.innerHTML = '';
+        
+        } else if(firstName === "" || lastName === ""){
+            nameError.innerHTML = 'Veuillez rentrer un nom et prénom';
+            passwordError.innerHTML = "";
+            passwordConfirmError.innerHTML = "";
+            emailError.innerHTML = "";
+            
         } else {
             passwordConfirmError.innerHTML = "";
             axios({
@@ -45,13 +60,19 @@ const SignUp = () => {
                     if (res.data.message === "Email déjà créé") {
                         emailError.innerHTML = res.data.message;
                         passwordError.innerHTML = "";
-                    } else if(res.data.error === "Cet email n'est pas valide") {
+                        
+                       
+                    } else if (res.data.error === "Cet email n'est pas valide") {
                         emailError.innerHTML = res.data.error;
                         passwordError.innerHTML = "";
-                    } else if (res.data.error === 'Le mot de passe doit contenir 8 caractères minimum, une majuscule et un chiffre'){
+                        
+                       
+                    } else if (res.data.error === 'Le mot de passe doit contenir 8 caractères minimum, une majuscule et un chiffre') {
                         passwordError.innerHTML = res.data.error;
                         emailError.innerHTML = "";
-                    } else{
+                        
+                        
+                    } else {
                         setFormSubmit(true);
                     }
                 })
@@ -60,6 +81,8 @@ const SignUp = () => {
                 })
         }
     }
+    //********************************************************************/
+    
 
     return (
         <Fragment>
@@ -67,7 +90,10 @@ const SignUp = () => {
                 (
                     <Fragment>
                         <LogIn />
-                        <h4 className='success'>Enregistrement réussi, veuillez vous connecter <i className="fa-solid fa-circle-check"></i></h4>
+                        <h4
+                            className='success'>Enregistrement réussi, veuillez vous connecter
+                            <i className="fa-solid fa-circle-check"></i>
+                        </h4>
                     </Fragment>
                 )
                 :
@@ -95,6 +121,7 @@ const SignUp = () => {
                             value={lastName}
                         />
                         <br />
+                        <div className="name-error error"></div>
 
                         <label htmlFor="email">Email</label>
                         <br />

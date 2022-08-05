@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-// posts
 export const GET_COMMENTS = 'GET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 
-
+//********************************************************************/
 export const getComments = ()=>{
     return (dispatch)=>{
         return axios
@@ -18,8 +17,10 @@ export const getComments = ()=>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/
 
 
+//********************************************************************/
 export const addComment = (text, postId)=>{
     return (dispatch)=>{
         return axios({
@@ -34,7 +35,10 @@ export const addComment = (text, postId)=>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/
 
+
+//********************************************************************/
 export const editComment = (text, commentId)=>{
     return (dispatch)=>{
         return axios({
@@ -49,7 +53,10 @@ export const editComment = (text, commentId)=>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/
 
+
+//********************************************************************/
 export const deleteComment = (commentId)=>{
     return (dispatch)=>{
         return axios({
@@ -63,3 +70,4 @@ export const deleteComment = (commentId)=>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/

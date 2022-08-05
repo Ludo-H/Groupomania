@@ -7,7 +7,6 @@ export default function likeReducer(state = initialState, action){
         case GET_LIKES:
             return action.payload
             
-    
         default:
             return state
     }

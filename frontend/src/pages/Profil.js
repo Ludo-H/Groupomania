@@ -1,32 +1,26 @@
 import React, { Fragment} from 'react';
-import Cookies from 'js-cookie';
 import Header from '../components/Header';
 import {useDispatch, useSelector } from 'react-redux';
 import UploadImage from '../components/Profil/UploadImage';
 import UploadNameLastname from '../components/Profil/UploadNameLastname';
 import { deleteAccount } from '../actions/user.actions';
-import cookie from 'js-cookie';
+import { fetchToken, removeCookie } from '../components/Utils';
 
 const Profil = () => {
 
-  const fetchToken = () => {
-    const token = Cookies.get().jwt;
-    if (!token) {
-      window.location.replace("http://localhost:3001/")
-    }
-  }
+  //********************************************************************/
   fetchToken();
+  //********************************************************************/
 
-  const removeCookie = (key)=>{
-    if(window !== "undefined"){
-        cookie.remove(key, {expires : 1})
-    }
-}
 
+  //********************************************************************/
   const userData = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
+  //********************************************************************/
 
+
+  //********************************************************************/
   const handleDelete = ()=>{
     if(window.confirm('Voulez-vous vraiment supprimer votre compte ?')){
       dispatch(deleteAccount(userData.userId))
@@ -34,6 +28,8 @@ const Profil = () => {
       .then(()=> window.location = '/')
     }
   }
+  //********************************************************************/
+  
 
   return (
     <Fragment>

@@ -9,9 +9,9 @@ const Index = () => {
     return (
         <Router>
             <Routes>
-                <Route path='/' element={<Connect/>} />
-                <Route path='/profil' element={<Profil/>} />
-                <Route path='/home' element={<Home/>} />
+                <Route exact path='/' element={<Connect/>} />
+                <Route exact path='/profil' element={<Profil/>} />
+                <Route exact path='/home' element={<Home/>} />
                 <Route path='*' element={<Error/>} />
             </Routes>
         </Router>

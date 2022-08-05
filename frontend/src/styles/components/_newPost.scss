@@ -1,8 +1,5 @@
 .newPost-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @include flexCenterColumn;
 }
 
 .user-image{
@@ -11,22 +8,19 @@ padding: 10px;
         width: 80px;
         height: 80px;
         border-radius: 50px;
-        border: 1px solid $black;
+        border: $borderBlack;
     }
 }
 
 .newPost-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flexCenterColumn;
     width: 100%;
 
 }
 
 
 #text{
-    border: 1px solid $black;
+    border: $borderBlack;
     max-height: 200px;
     margin-bottom: 10px;
     width: 80%;
@@ -34,7 +28,7 @@ padding: 10px;
 
 .futurePost-container{
     display: flex;
-    border: 1px solid $black;
+    border: $borderBlack;
     width: 95%;
     margin-bottom: 10px;
 
@@ -51,10 +45,8 @@ padding: 10px;
         flex-basis: 90%;
 
         .futurePost-header{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid $black;
+            @include flexSpaceBetween;
+            border-bottom: $borderBlack;
             width: 95%;
     
             h3{
@@ -69,10 +61,7 @@ padding: 10px;
         .futurePost-content{
             font-size: 12px;
             word-break: break-all;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            @include flexCenterColumn;
             width: 95%;
            
             
@@ -102,9 +91,7 @@ padding: 10px;
     margin-bottom: 10px;
 
     .image-icon{
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        @include flexCenter;
         width: 30px;
         padding-left: 30px;
         

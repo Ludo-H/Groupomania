@@ -32,12 +32,8 @@ router.post("/signup", emailValidator, password, userController.signup);
 router.post("/login", userController.login);
 
 // La route update
-// router.put("/:id", authentification, multer, userController.updateUser);
 router.patch("/image/:id", authentification, multer, userController.modifyPhotoProfil);
-
-
 router.patch("/:id", authentification, userController.modifyNameAndLastname);
-
 
 // La route désactiver compte
 router.delete("/delete/:id", authentification, userController.deleteAccount);

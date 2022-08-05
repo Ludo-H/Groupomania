@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_USERS = 'GET_USERS';
 
+//********************************************************************/
 export const getUsers = ()=>{
     return async (dispatch)=>{
         return await axios
@@ -12,3 +13,4 @@ export const getUsers = ()=>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/

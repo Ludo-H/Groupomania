@@ -15,9 +15,6 @@ const router = express.Router();
 // Route pour afficher tous les comment : GET /api/comment
 router.get("/", authentification, commentController.getAllComment);
 
-// Route pour afficher le comment cliqué : GET /api/comment/:id
-router.get("/:id", authentification, commentController.getOneComment);
-
 // Route pour créer un comment dans la BDD : POST /api/comment 
 router.post("/", authentification, commentController.createComment);
 

@@ -1,9 +1,13 @@
 import React from 'react';
+import { fetchToken } from '../components/Utils';
 
 const Error = () => {
+
+    fetchToken();
+
     return (
-        <div>
-            Introuvable
+        <div className='error-page'>
+            Page introuvable
         </div>
     );
 };

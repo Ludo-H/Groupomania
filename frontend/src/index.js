@@ -12,7 +12,7 @@ import thunk from 'redux-thunk'
 import rootReducer from "./reducers";
 import { getUsers } from './actions/users.actions';
 
-// devtools
+// devtools, supprimer lors de mise en production
 import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger'
 

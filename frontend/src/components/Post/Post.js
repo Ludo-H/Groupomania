@@ -10,6 +10,7 @@ import LikeButton from './LikeButton';
 //props donné pendant le map
 const Post = ({ post }) => {
 
+    //********************************************************************/
     // Pour montrer a l'user que le post charge
     const [isLoading, setIsLoading] = useState(true)
 
@@ -19,7 +20,10 @@ const Post = ({ post }) => {
 
     // pour afficher les comments
     const [showComments, setShowComments] = useState(false);
+    //********************************************************************/
 
+
+    //********************************************************************/
     const userInfos = useContext(UserInfosContext) 
 
     // on récupère dans le store redux les infos 
@@ -28,7 +32,10 @@ const Post = ({ post }) => {
 
     // import du dispatch pour lancer l'actioon
     const dispatch = useDispatch();
+    //********************************************************************/
 
+
+    //********************************************************************/
     // declenche la validation de l'update
     const updateItem = () => {
         if (textUpdate) {
@@ -37,12 +44,16 @@ const Post = ({ post }) => {
             setIsUpdated(false)
         }
     }
+    //********************************************************************/
 
+
+    //********************************************************************/
     // il se joue pour l'affichage de posts, variant entrre le loading spinner et l'affichage
     // dépend du reducer avec toutes les infos users
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false)
     }, [usersData])
+    //********************************************************************/
 
     return (
         <li className='post-container'>

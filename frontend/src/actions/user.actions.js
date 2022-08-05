@@ -10,9 +10,10 @@ export const UPLOAD_NAME_LASTNAME = "UPLOAD_NAME_LASTNAME";
 export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
 
 
-
 // puis chaque action aura sa fonction
 // dispatch représente ce qui va partir au reducer
+
+//********************************************************************/
 export const getUser = (userId) =>{
     return async (dispatch)=>{
         return await axios
@@ -25,8 +26,10 @@ export const getUser = (userId) =>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/
 
 
+//********************************************************************/
 export const uploadPicture = (data, userId)=>{
     return (dispatch)=>{
         return axios({
@@ -41,7 +44,10 @@ export const uploadPicture = (data, userId)=>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/
 
+
+//********************************************************************/
 export const uploadNameLastname = (data, userId)=>{
     return async(dispatch)=>{
         return await axios({
@@ -56,7 +62,10 @@ export const uploadNameLastname = (data, userId)=>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/
 
+
+//********************************************************************/
 export const deleteAccount = (userId) =>{
     return async (dispatch)=>{
         return await axios
@@ -69,3 +78,4 @@ export const deleteAccount = (userId) =>{
         .catch((error)=> console.log(error))
     }
 }
+//********************************************************************/

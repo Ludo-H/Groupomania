@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom';
 
 const HomeProfil = () => {
 
+    // On récupère le contenu de l'user connecté dans son reducer
     const userData = useSelector((state) => state.userReducer);
 
     return (

@@ -3,17 +3,19 @@ import axios from 'axios';
 
 const LogIn = () => {
 
+    //********************************************************************/
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState("");
+    //********************************************************************/
 
+
+    //********************************************************************/
     const handleLogin = (e) => {
         e.preventDefault();
 
         // on capte les div d'erreurs
         const emailError = document.querySelector('.email.error')
         const passwordError = document.querySelector('.password.error')
-
-        // peut etre inclure des regex avant le axios pour deja vérifier les infos
 
         axios({
             method: 'post',
@@ -42,6 +44,8 @@ const LogIn = () => {
                 console.log(error);
             })
     }
+    //********************************************************************/
+
 
     return (
         <form

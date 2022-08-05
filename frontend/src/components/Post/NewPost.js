@@ -6,6 +6,7 @@ import { dateParser, isEmpty } from '../Utils';
 
 const NewPost = () => {
 
+    //********************************************************************/
     // chargement du component
     const [isLoading, setIsLoading] = useState(true);
 
@@ -16,16 +17,20 @@ const NewPost = () => {
 
     // a voir si ça marche
     const [video, setVideo] = useState('')
+    //********************************************************************/
 
+
+    //********************************************************************/
     // pour pouvoir vider le contenu de l'input à l'annulation du post
     const inputRef = useRef();
 
     const userData = useSelector((state) => state.userReducer);
 
     const dispatch = useDispatch();
+    //********************************************************************/
 
 
-
+    //********************************************************************/
     // on va créé le contenu à envoyer au back dans une variable, qu'on passera a la fonction axios
     const handlePost = async () => {
 
@@ -47,7 +52,10 @@ const NewPost = () => {
             alert('Veuillez créer un post')
         }
     }
+    //********************************************************************/
 
+
+    //********************************************************************/
     // image est l'affichage en front, file est le fichier non visuel a envoyé dans BDD
     // la fonction permet d'inclure l'url choisi
     const handleImage = (e) => {
@@ -55,9 +63,10 @@ const NewPost = () => {
         setFile(e.target.files[0]);
         setVideo('')
     }
+    //********************************************************************/
 
 
-
+    //********************************************************************/
     // pour annuler le contenu ecrit
     const cancelPost = () => {
         setText("");
@@ -67,7 +76,10 @@ const NewPost = () => {
         inputRef.current.value = '';
         dispatch(getPosts());
     }
+    //********************************************************************/
 
+
+    //********************************************************************/
     // la fonction va analyser le contenu du post en séparant par chaque espace
     // puis on analyse toutes ces sections
     // si on trouve un des deux cas énoncés, on remplace une partie du lien (car on ne pourrait pas voir la video sinon) par embed.
@@ -84,7 +96,10 @@ const NewPost = () => {
             }
         }
     }
+    //********************************************************************/
 
+
+    //********************************************************************/
     useEffect(() => {
         // si userData n'est pas vide
         if (!isEmpty(userData)) {
@@ -92,7 +107,7 @@ const NewPost = () => {
         }
         handleVideo();
     }, [userData, text, video])
-
+    //********************************************************************/
 
 
     return (
@@ -148,18 +163,18 @@ const NewPost = () => {
                             ) : null}
                             <div className="futurePost-footer">
                                 <div className="image-icon">
-                                    {/* <i className="fa-solid fa-image"></i>
-                                    <input 
-                                    type="file" 
-                                    id='file-newPost' 
-                                    name='file' 
-                                    accept='.jpg, .jpeg, .png' 
-                                    onChange={(e) => handleImage(e)} /> */}
                                     {video === '' &&
                                         (
                                             <Fragment>
                                                 <i className="fa-solid fa-image"></i>
-                                                <input ref={inputRef} type="file" id='file-newPost' name='file' accept='.jpg, .jpeg, .png' onChange={(e) => handleImage(e)} />
+                                                <input
+                                                    ref={inputRef}
+                                                    type="file"
+                                                    id='file-newPost'
+                                                    name='file'
+                                                    accept='.jpg, .jpeg, .png'
+                                                    onChange={(e) => handleImage(e)}
+                                                />
                                             </Fragment>
                                         )
                                     }
@@ -177,11 +192,15 @@ const NewPost = () => {
                                         :
                                         null
                                     }
-                                    <button className='send' onClick={handlePost}><i className="fa-solid fa-paper-plane"></i></button>
+                                    <button
+                                        className='send'
+                                        onClick={handlePost}
+                                    >
+                                        <i className="fa-solid fa-paper-plane"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-
                     </Fragment>
                 )}
         </div>

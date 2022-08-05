@@ -1,8 +1,6 @@
 .nav-header{
-    display: flex;
-    justify-content: space-between;
+    @include flexSpaceBetween;
     padding: 20px;
-    align-items: center;
     border-bottom: 2px solid $color-1;
 }
 
@@ -18,5 +16,4 @@
 .fa-right-from-bracket{
     font-size: 30px;
     color: $color-3;
-    
 }

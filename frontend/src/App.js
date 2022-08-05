@@ -10,16 +10,23 @@ import Routes from "./components/Routes/index";
 
 function App() {
 
+  //********************************************************************/
   // On récupére la valeur userId du cookie (token) pour le faire passer a dautrre comp
   const [infosUser, setInfosUser] = useState({
     userId : null,
     admin : null
   })
+  //********************************************************************/
 
+
+  //********************************************************************/
   // hook qui permet d'envoyer l'info avec la fonction de action
   // dispatch c'est pour déclencher une fonction
   const dispatch = useDispatch()
+  //********************************************************************/
 
+
+  //********************************************************************/
   // jwt decode permet de vérifier le contenu du token récupéré
   useEffect(() => {
     const fetchToken = () => {
@@ -36,6 +43,7 @@ function App() {
 
     if (infosUser.userId) dispatch(getUser(infosUser.userId))
   }, [infosUser.userId ,dispatch])
+  //********************************************************************/
   
 
   return (

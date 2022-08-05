@@ -5,6 +5,7 @@ import { UserInfosContext } from '../AppContext';
 
 const EditDeleteComment = ({ comment, postId }) => {
 
+    //********************************************************************/
     // on verifie si l'user est l'auter du post
     const [isAuthor, setIsAuthor] = useState(false)
 
@@ -13,35 +14,45 @@ const EditDeleteComment = ({ comment, postId }) => {
 
     // le contenu de la modification
     const [text, setText] = useState('')
+    //********************************************************************/
 
+
+    //********************************************************************/
     // userId créé plus haut dans app
     const userInfos = useContext(UserInfosContext);
 
     // import du dispatch pour lancer l'actioon
     const dispatch = useDispatch();
+    //********************************************************************/
 
+
+    //********************************************************************/
     // fonction d'edition
     const handleEdit = (e) => {
         e.preventDefault();
         if (text) {
             try {
                 dispatch(editComment(text, comment.comment_id))
-                .then(()=>dispatch(getComments()))
-                .then(()=>setText(''))
-                .then(()=>setEdit(false))
+                    .then(() => dispatch(getComments()))
+                    .then(() => setText(''))
+                    .then(() => setEdit(false))
             } catch (error) {
                 console.log(error);
             }
         }
     }
+    //********************************************************************/
 
-    
 
+    //********************************************************************/
     // suppression du comm
     const handleDelete = () => {
         dispatch(deleteComment(comment.comment_id));
     }
+    //********************************************************************/
 
+
+    //********************************************************************/
     useEffect(() => {
         const checkAuthor = () => {
             if (userInfos.userId === comment.user_id) {
@@ -50,6 +61,7 @@ const EditDeleteComment = ({ comment, postId }) => {
         }
         checkAuthor();
     }, [userInfos.userId, comment.user_id])
+    //********************************************************************/
 
 
 
@@ -66,7 +78,12 @@ const EditDeleteComment = ({ comment, postId }) => {
                         <i className="fa-solid fa-pen-to-square"></i>
                     </span>
                     <br />
-                    <input type="text" name='text' onChange={(e) => setText(e.target.value)} defaultValue={comment.comment_text} />
+                    <input
+                        type="text"
+                        name='text'
+                        onChange={(e) => setText(e.target.value)}
+                        defaultValue={comment.comment_text}
+                    />
                     <br />
                     <div className="bottom-btn">
                         <i onClick={() => {

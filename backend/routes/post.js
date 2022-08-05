@@ -14,9 +14,6 @@ const router = express.Router();
 // Route pour afficher tous les post : GET /api/post
 router.get("/", authentification, postController.getAllPost);
 
-// Route pour afficher le post cliqué : GET /api/post/:id
-router.get("/:id", authentification, postController.getOnePost)
-
 // Route pour créer un post dans la BDD : POST /api/post 
 router.post("/", authentification, multer, postController.createPost);
 
