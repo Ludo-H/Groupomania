@@ -15,10 +15,10 @@ const database = require("./database/database");
 
 
 // On importe dotenv pour l'utiliser dans l'adresse de la BDD
-require('dotenv').config();
+require('dotenv').config(); 
 
 
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser') 
 app.use(cookieParser())
 
 

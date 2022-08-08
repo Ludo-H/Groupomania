@@ -49,7 +49,7 @@ const LikeButton = ({ post }) => {
     return (
         <div className='like-container'>
             <i
-                className={userLikeThePost.length === 0 ? 'fa-solid fa-heart empty' : 'fa-solid fa-heart heart'}
+                className={userLikeThePost.length > 0 ? 'fa-solid fa-heart heart' : 'fa-solid fa-heart empty'}
                 onClick={handleLike}
             ></i>
             <p>{likesDuPost.length}</p>

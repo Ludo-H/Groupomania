@@ -172,7 +172,7 @@ exports.getAllUsers = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(400).json("Erreur affichage utilisateurs " + error);
+        res.status(400).json("Erreur affichage utilisateurs " + error); 
     }
 
 };
