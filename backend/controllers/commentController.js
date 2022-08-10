@@ -9,7 +9,7 @@ exports.getAllComment = async (req, res) => {
         const sql = "SELECT * FROM comments";
         database.query(sql, (error, result) => {
             if (error) throw error;
-            // Affichage des infos des comm, a voir si on sélectionne les resultats...
+            // Affichage des infos des comm, a voir si on sélectionne les resultats... 
             res.status(200).json(result);
         });
     } catch (error) {

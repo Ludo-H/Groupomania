@@ -53,7 +53,7 @@ exports.signup = async (req, res) => {
 exports.login = (req, res) => {
     try {
         // On crypte le mail
-        const emailCryptoJS = cryptoJS.HmacSHA256(req.body.email, process.env.CHIFFREMENT_EMAIL).toString();
+        const emailCryptoJS = cryptoJS.HmacSHA256(req.body.email, process.env.CHIFFREMENT_EMAIL).toString(); 
         // On créé la requète
         const sql = "SELECT * FROM users WHERE user_email = ?";
         database.query(sql, emailCryptoJS, async (error, result) => {
