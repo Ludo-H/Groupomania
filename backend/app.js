@@ -1,5 +1,6 @@
 // Importer express
 const express = require("express");
+import path from 'path';
 
 
 // On installe et ajout helmet pour sécuriser "en configurant de manière appropriée des en-têtes HTTP."
@@ -67,6 +68,12 @@ app.use("/api/like", likeRoutes);
 
 // On créé la route pour accéder aux images postées
 app.use("/images", express.static(path.join(__dirname, "images")));
+
+const public_path = path.join(__dirname, './build');
+app.use(express.static(public_path));
+app.get('*', (_, res)=>{
+    res.sendFile(path.join(public_path, 'index.html'));
+})
 
 
 // Utiliser helmet à la fin, problemes d'affichage d'images rencontrés si fonction plus haut
